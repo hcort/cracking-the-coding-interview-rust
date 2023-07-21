@@ -24,7 +24,7 @@ fn url_encoder(s: &str) -> String
 
 fn url_encoder_2(url: &str) -> String
 {
-    url.trim().replace(" " , "%20")
+    url.trim().replace(' ', "%20")
 }
 
 fn url_encoder_3(url: &str) -> String

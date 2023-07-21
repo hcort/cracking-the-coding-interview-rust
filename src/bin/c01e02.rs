@@ -33,7 +33,7 @@ fn is_permutation(s1: &str, s2: &str) -> bool {
             characters_count_2.remove(c);
         }
     }
-    return characters_count_2.is_empty();
+    characters_count_2.is_empty()
 }
 
 #[cfg(test)]

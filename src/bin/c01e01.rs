@@ -18,7 +18,7 @@ fn all_chars_unique_part_a(input_str: &str) -> bool {
         }
         letters[c as usize] = true;
     }
-    return true;
+    true
 }
 
 fn all_chars_unique_part_a_hash(input_str: &str) -> bool {
@@ -31,7 +31,7 @@ fn all_chars_unique_part_a_hash(input_str: &str) -> bool {
         }
         characters.insert(c);
     }
-    return true;
+    true
 }
 
 fn all_chars_unique_part_b(s: &str) -> bool {
@@ -74,9 +74,9 @@ fn all_chars_unique_part_b_no_extra_data(s: &str) -> bool {
     let str_as_bytes = s.as_bytes();
     for (i, c) in str_as_bytes.iter().enumerate()
     {
-        for j in i+1..str_as_bytes.len()
+        for item in str_as_bytes.iter().skip(i+1)
         {
-            if *c == str_as_bytes[j]
+            if *c == *item
             {
                 return false;
             }

@@ -16,20 +16,21 @@ fn zero_matrix(matrix: &[Vec<u32>]) -> Vec<Vec<u32>> {
 
     for x in 0..x_len
     {
-        for y in x..x_len
+        for (y, item) in zeroed_matrix[x].iter_mut().enumerate().skip(x)
         {
-            if zeroed_matrix[x][y] == 0 {
+            if *item == 0 {
                 zeroed_rows[x] = true;
                 zeroed_cols[y] = true;
             }
         }
     }
 
-    for x in 0..x_len
+    //for x in 0..x_len
+    for (x, item_r) in zeroed_rows.iter().enumerate()
     {
-        for y in 0..y_len
+        for (y, item_c) in zeroed_cols.iter().enumerate()
         {
-            if zeroed_rows[x] || zeroed_cols[y] {
+            if *item_r || *item_c {
                 zeroed_matrix[x][y] = 0;
             }
         }
@@ -37,24 +38,28 @@ fn zero_matrix(matrix: &[Vec<u32>]) -> Vec<Vec<u32>> {
     zeroed_matrix
 }
 
-fn zero_matrix_no_extra(matrix: &[Vec<u32>]) -> Vec<Vec<u32>> {
+fn zero_row_col(mat: &mut [Vec<u32>], x: usize, y: usize)
+{
+    for row in mat.iter_mut() {
+        row[y] = 0;
+    }
+
+    // Zero out column
+    for i in 0..mat[x].len() {
+        mat[x][i] = 0;
+    }
+}
+
+fn zero_matrix_no_extra(matrix: &Vec<Vec<u32>>) -> Vec<Vec<u32>> {
 
     let mut zeroed_matrix = matrix.to_owned();
 
-    let x_len = zeroed_matrix.len();
-    let y_len = zeroed_matrix[0].len();
-
-    for x in 0..x_len
+    for (x, row) in matrix.iter().enumerate()
     {
-        for y in x..x_len
+        for (y, item) in row.iter().enumerate()
         {
-            if matrix[x][y] == 0 {
-                for i in 0..x_len{
-                    zeroed_matrix[i][y] = 0;
-                }
-                for i in 0..y_len{
-                    zeroed_matrix[x][i] = 0;
-                }
+            if *item == 0 {
+                zero_row_col(&mut zeroed_matrix, x, y);
             }
         }
     }

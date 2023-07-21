@@ -16,15 +16,12 @@ fn rotate_matrix_transpose(matrix: &[Vec<u32>]) -> Vec<Vec<u32>> {
             rotated_image[y][x] = temp;
         }
     }
-    print_matrix(&rotated_image);
 
-    for x in 0..x_len
+    for row in rotated_image.iter_mut().take(x_len)
     {
         for y in 0..x_len/2
         {
-            let temp = rotated_image[x][y];
-            rotated_image[x][y] = rotated_image[x][x_len-y-1];
-            rotated_image[x][x_len-y-1] = temp;
+            row.swap(y, x_len-y-1);
         }
     }
     rotated_image
@@ -51,7 +48,6 @@ fn rotate_image_90_degrees(image: &[Vec<u32>]) -> Vec<Vec<u32>> {
             rotated_image[x][y] ^= rotated_image[y][x];
             rotated_image[y][x] ^= rotated_image[x][y];
             rotated_image[x][y] ^= rotated_image[y][x];
-            print_matrix(&rotated_image);
         }
     }
 

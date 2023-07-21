@@ -55,7 +55,7 @@ fn same_length(a: &str, b: &str) -> bool
             change_found = true;
         }
     }
-    return true;
+    true
 }
 
 fn off_by_one(a: &str, b: &str) -> bool
@@ -76,7 +76,7 @@ fn off_by_one(a: &str, b: &str) -> bool
         }
         idx2 += 1;
     }
-    return true;
+    true
 }
 
 fn is_one_edit_away_2(a: &str, b: &str) -> bool
@@ -87,7 +87,7 @@ fn is_one_edit_away_2(a: &str, b: &str) -> bool
     let insert: bool = (a.len() as i32) < (b.len() as i32);
     let remove: bool = (a.len() as i32) > (b.len() as i32);
     // insert and remove a character are complimentary operations
-    return if insert {
+    if insert {
         off_by_one(a, b)
     } else if remove {
         off_by_one(b, a)
